@@ -2,44 +2,10 @@ pipeline {
     agent any
 
     stages {
-
-        stage('Checkout Code') {
+        stage('Test') {
             steps {
-                git branch: 'main', url: 'https://github.com/kavimani-sam/demo_deveops.git'
+                echo 'Hello DevOps Pipeline Working ✅'
             }
-        }
-
-        stage('Install') {
-            steps {
-                dir('devops-ai-agents') {
-                    bat 'npm install'
-                }
-            }
-        }
-
-        stage('Build') {
-            steps {
-                dir('devops-ai-agents') {
-                    bat 'npm run build'
-                }
-            }
-        }
-
-        stage('Run') {
-            steps {
-                dir('devops-ai-agents') {
-                    bat 'npm start'
-                }
-            }
-        }
-    }
-
-    post {
-        success {
-            echo 'Pipeline executed successfully!'
-        }
-        failure {
-            echo 'Pipeline failed!'
         }
     }
 }
