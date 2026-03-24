@@ -11,19 +11,25 @@ pipeline {
 
         stage('Install') {
             steps {
-                bat 'npm install'
+                dir('devops-ai-agents') {
+                    bat 'npm install'
+                }
             }
         }
 
         stage('Build') {
             steps {
-                bat 'npm run build'
+                dir('devops-ai-agents') {
+                    bat 'npm run build'
+                }
             }
         }
 
         stage('Run') {
             steps {
-                bat 'npm start'
+                dir('devops-ai-agents') {
+                    bat 'npm start'
+                }
             }
         }
     }
