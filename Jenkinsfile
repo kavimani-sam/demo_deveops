@@ -1,37 +1,29 @@
 pipeline {
     agent any
 
-    tools {
-        jdk 'jdk11'          // Configure in Jenkins (Global Tool Config)
-        maven 'maven3'       // Optional (if using Maven)
-    }
-
     stages {
 
         stage('Checkout Code') {
             steps {
-                git 'https://github.com/kavimani-sam/demo_deveops.git'
+                git branch: 'main', url: 'https://github.com/kavimani-sam/demo_deveops.git'
+            }
+        }
+
+        stage('Install') {
+            steps {
+                bat 'npm install'
             }
         }
 
         stage('Build') {
             steps {
-                echo 'Building the project...'
-                sh 'mvn clean install'
+                bat 'npm run build'
             }
         }
 
-        stage('Test') {
+        stage('Run') {
             steps {
-                echo 'Running tests...'
-                sh 'mvn test'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo 'Deploying application...'
-                sh 'echo Deploy step here'
+                bat 'npm start'
             }
         }
     }
